@@ -5,10 +5,11 @@ let amapPromise: Promise<any> | null = null
 export function loadAMap(): Promise<any> {
 	if (!amapPromise) {
 		const key = import.meta.env.VITE_AMAP_KEY
+		const securityJsCode = import.meta.env.VITE_AMAP_SECURITY_CODE
 		if (!key) {
 			throw new Error('Missing VITE_AMAP_KEY in environment')
 		}
-		amapPromise = AMapLoader.load({
+		const loaderOptions: any = {
 			key,
 			version: '2.0',
 			plugins: [
@@ -18,8 +19,11 @@ export function loadAMap(): Promise<any> {
 				'AMap.PlaceSearch',
 				'AMap.Geocoder',
 			],
-			// securityJsCode: '', // if security is enabled
-		})
+		}
+		if (securityJsCode) {
+			loaderOptions.securityJsCode = securityJsCode
+		}
+		amapPromise = AMapLoader.load(loaderOptions)
 	}
 	return amapPromise
 }
