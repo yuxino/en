@@ -6,3 +6,8 @@ interface ImportMetaEnv {
 interface ImportMeta {
 	readonly env: ImportMetaEnv
 }
+
+declare module '@amap/amap-jsapi-loader' {
+	const AMapLoader: any
+	export default AMapLoader
+}

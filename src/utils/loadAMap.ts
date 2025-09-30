@@ -18,6 +18,7 @@ export function loadAMap(): Promise<any> {
 				'AMap.AutoComplete',
 				'AMap.PlaceSearch',
 				'AMap.Geocoder',
+				'AMap.DistrictSearch',
 			],
 		}
 		if (securityJsCode) {
@@ -25,5 +26,5 @@ export function loadAMap(): Promise<any> {
 		}
 		amapPromise = AMapLoader.load(loaderOptions)
 	}
-	return amapPromise
+	return amapPromise as Promise<any>
 }
